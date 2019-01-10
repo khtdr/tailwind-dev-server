@@ -17,8 +17,8 @@ yarn start
 Open `http://0.0.0.0:8080`
 
 Edit any of the following files:
- - index.html
- - style.css
- - tailwind.js
+ - [index.html](https://github.com/khtdr/tailwind-server/blob/master/index.html)
+ - [style.css](https://github.com/khtdr/tailwind-server/blob/master/style.css)
+ - [tailwind.js](https://github.com/khtdr/tailwind-server/blob/master/tailwind.js)
 
 Changes will be recompiled and automatically refreshed in your browser.
