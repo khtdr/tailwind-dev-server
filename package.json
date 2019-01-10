@@ -1,0 +1,12 @@
+{
+  "private": true,
+  "scripts": {
+    "start": "node server"
+  },
+  "devDependencies": {
+    "express": "^4.16.4",
+    "npm-path": "^2.0.4",
+    "socket.io": "^2.2.0",
+    "tailwindcss": "^0.7.3"
+  }
+}
