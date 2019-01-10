@@ -4,8 +4,8 @@ Simple quick way to get started learning and playing with Tailwindcss
 
 ## Installation
 ```bash
-git clone this
-cd this
+git clone https://github.com/khtdr/tailwind-server
+cd tailwind-server
 yarn
 ```
 
