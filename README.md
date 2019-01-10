@@ -16,9 +16,9 @@ yarn start
 
 Open `http://0.0.0.0:8080`
 
-Edit the following files:
-    - index.html
-    - style.css
-    - tailwind.js
+Edit any of the following files:
+ - index.html
+ - style.css
+ - tailwind.js
 
 Changes will be recompiled and automatically refreshed in your browser.
