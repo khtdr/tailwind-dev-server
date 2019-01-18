@@ -28,7 +28,7 @@ yarn
 yarn start
 ```
 
-Open `http://0.0.0.0:8080`
+Open [http://localhost:8080](http://localhost:8080)
 
 ## Development
 
