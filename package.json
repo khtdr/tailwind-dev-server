@@ -1,7 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "start": "node server"
+    "start": "node server",
+    "build": "tailwind build style.css -c tailwind.js -o tailwind-bundle.css"
   },
   "dependencies": {
     "chalk": "^2.4.2",

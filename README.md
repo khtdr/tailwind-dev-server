@@ -19,6 +19,13 @@ yarn
 yarn start
 ```
 
+## Building
+If you like what you see and want to use it, run 
+```bash
+yarn build
+```
+And use your new `tailwind-bundle.css` build
+
 Open `http://0.0.0.0:8080`
 
 Edit any of the following files:
