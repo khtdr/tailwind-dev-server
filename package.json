@@ -1,5 +1,9 @@
 {
   "private": true,
+  "name": "tailwind-dev-server",
+  "version": "1.0.0",
+  "description": "hot-reloading dev server for hacking on tailwind css",
+  "main": "dev-server.js",
   "scripts": {
     "start": "node dev-server",
     "build": "tailwind build style.css -c tailwind.js -o tailwind-bundle.css"
@@ -8,5 +12,19 @@
     "chalk": "^2.4.2",
     "socket.io": "^2.2.0",
     "tailwindcss": "^0.7.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/khtdr/tailwind-dev-server.git"
+  },
+  "keywords": [
+    "tailwind",
+    "dev-server"
+  ],
+  "author": "Oh Kay",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/khtdr/tailwind-dev-server/issues"
+  },
+  "homepage": "https://github.com/khtdr/tailwind-dev-server#readme"
 }
