@@ -19,11 +19,6 @@ yarn
 yarn start
 ```
 
-## Building
-If you like what you see and want to save it and use it, run:
-```bash
-yarn build
-```
 And use your newly built `tailwind-bundle.css` stylesheet.
 
 Open `http://0.0.0.0:8080`
@@ -34,3 +29,9 @@ Edit any of the following files:
  - [tailwind.js](https://github.com/khtdr/tailwind-server/blob/master/tailwind.js)
 
 Changes will be recompiled and automatically refreshed in your browser.
+
+## Building
+If you like what you see and want to save it and use it, run:
+```bash
+yarn build
+```
