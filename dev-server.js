@@ -1,7 +1,4 @@
 /**
- * First things first...
- *
- * ==========================================================================
  * Copyright 2019 Oh Kay.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
@@ -22,13 +19,12 @@
  * CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * ==========================================================================
- *
- * This script does the following:
- *   - compiles your tailwind files
- *   - serves an HTML page with your tailwind markup
- *   - watches for changes, recompiles, and refreshes the browser
  */
+
+// This dev-server.js script does the following:
+//   - compiles your tailwind files, using `./stye.css` and `./tailwind.js`,
+//   - serves an HTML page with your tailwind markup,
+//   - and watches for changes, recompiles, and refreshes the browser.
 
 // The `fs` module will be used for:
 //   - reading files that will be served.
@@ -44,29 +40,29 @@ const { spawn } = require('child_process');
 // The `io` module will be used to send messages to the browser window.
 const io = require('socket.io');
 
-// Promisify allows for marginally cleaner code
+// Promisify allows for slightly cleaner and more readable code.
 const { promisify } = require('util');
 
-// Chalk provides colorful output
+// Chalk provides all the colorful output.
 const chalk = require('chalk');
 
 class TailwindCompiler {
     constructor () {
-        // this property always contains the latest valid compiled css
+        // This property always contains the latest valid compiled css
         this.css = '';
         // It is easier to read callbacks than promises, but easier to use promises.
-        // this provides both.
+        // This provides both, letting the code below use the `async` / `await` style.
         this.compile = promisify(this.compile);
     }
     compile (cb) {
-        // `spawn` allows for a consistent style of collecting output for
-        // both the stdout and stderr streams.
+        // The `spawn` function allows for a consistent style of
+        // collecting tailwind output, for both the stdout and stderr streams.
         const result = spawn(
             './node_modules/.bin/tailwind',
             ['build', 'style.css', '-c', 'tailwind.js']
         );
-        // build these strings as data comes in, finally calling the callback
-        // the callback maybe be sent the error if one is found
+        // Build these strings as data comes in, finally calling the callback.
+        // The callback might be sent the error, if one is found.
         let chunked_css = '';
         let chunked_error  = '';
         result.stdout.on('data', str => chunked_css += str);
@@ -81,39 +77,41 @@ class TailwindCompiler {
     }
 }
 
-// this tailwind compiler instance will be used in a few places to
-// trigger a new compile, and also for injecting the CSS into the HTML
+// This global tailwind compiler instance will be used in a few places to trigger
+// a new compile, and also for supplying the CSS that will end up in the HTML.
 const tailwind = new TailwindCompiler();
 
-// this is not a recursive wach, and it only expects to handle the files:
+// Monitor this directory and react to changes. This is not a recursive wach,
+// and it only expects to handle certain files:
 //  - index.html
 //  - style.css
 //  - tailwind.js
-// it may work with other *.html, *.js, and *.css files too
+// It may work with other *.html, *.js, and *.css files, too.
 fs.watch(__dirname, (type, name) => {
-    // this doesn't happen in normal editing, but it happens quite frequently
-    // while working on this project. It can be skipped. (TODO: restart node server?)
+    // This doesn't happen in normal editing, but it happens quite frequently
+    // while working on this project. (TODO: restart node server?)
     if (name === 'dev-server.js') {
         return;
     }
     console.debug(chalk.dim('...'), chalk.italic(`detected ${type}:`), chalk.bold(name));
     if (name.match(/\.htm/)) {
-        // if they have edited an html page, there is nothing to compile
+        // If they have edited an HTML page, there is nothing to re-compile.
         reloadPage();
     } else if (name.match(/\.(css|js)$/)) {
-        // if it is a css or javascript file, give the compile a shot!
-        // after compiling, it will either reload the page, or display an error
+        // If it is a CSS or JS file, give the compilation a shot!
+        // After compiling, it will either reload the page, or display an error.
         compileStyles();
     }
 });
 
-// the socket will be used to send events to the browser
-// inside the socket is a _very_ rudimentary web server. It:
-//  - ignores that damn favicon request
-//  - checks for 404s
-//  - serves the file if it finds it
-// if the file is an html file, it will inject the socket javascript that listens
-// for events from this socket, and it will also inject the compiled tailwind css
+// This socket will be used to send events to the browser.
+// Inside the socket is a _very_ rudimentary web server. It:
+//  - ignores that damn favicon request,
+//  - redirects / --> /index.html,
+//  - checks for 404s,
+//  - and serves the file if it finds it.
+// If the file is an HTML file, it will inject the socket javascript that listens
+// for events from this socket, and it will also inject the compiled tailwind CSS.
 const socket = io(http.createServer(
     (request, response) => {
         if (request.url === '/favicon.ico') {
@@ -134,27 +132,31 @@ const socket = io(http.createServer(
         })
     }
 ).listen(8080, async () => {
-    // this is where it all starts
+    // This is where it all starts.
     console.log(chalk.yellow('Tailwind CSS development server'));
     await compileStyles();
     console.log('-->', chalk.blue('http://0.0.0.0:8080'));
 }));
 
-// this function can be `await`ed and it `await`s on the tailwind compile. No callbacks.
-// it is responsible for calling the right functions based on the compiler output
+// There are no callbacks, since this uses the `promisified` compile method above.
+// After attempting to compile, it will take the next appropriate action:
+//   - reload the page on success.
+//   - show a nice error message on failure (and in the browser console).
 async function compileStyles () {
     console.debug(chalk.dim('...'), 'compiling tailwind css');
     try {
         await tailwind.compile();
         reloadPage();
     } catch (ex) {
-        // get rid of that emoji on the front
+        // The tailwind error output starts with a NO emoji,
+        // but it doesn't look as nice in this format.
+        // This regex moves past that first "non-word" character.
         const message = ex.error.match(/(\w(\n|.)*)/)[1];
         showError(message);
     }
 }
 
-// this contains the code that listens for the socket messages
+// This contains the JS code that listens for the socket messages and takes action.
 function injectSocketCode (html) {
     return `
         ${html}
@@ -180,7 +182,7 @@ function injectCompiledStyles (html) {
     `;
 }
 
-// these last two emit the socket events
+// These last two emit the socket events...
 
 function reloadPage () {
     console.debug(chalk.dim('...'), 'sending reload event to browser')
@@ -189,14 +191,15 @@ function reloadPage () {
 
 function showError (message) {
     const lines = message.split(/\n/);
-    // Use .write to omit the newline character
+    // Uses .write to omit the newline character.
     process.stderr.write(chalk.red('ERR '));
     for (let i=0; i<lines.length; i++) {
-        // the first line is bold, the second is normal, and the rest are dim
-        // by far, the grossest line of code in the file
+        // The first line is bold, the second is normal, and the rest are dim.
+        // This is, by far, the grossest line of code in the file.
         let color = i === 0 ? chalk.bold : i === 1 ? chalk: chalk.dim;
         console.error(color(lines[i]));
     }
     socket.emit('error', message);
 }
 
+// ---
