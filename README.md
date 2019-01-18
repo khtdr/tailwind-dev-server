@@ -19,8 +19,6 @@ yarn
 yarn start
 ```
 
-And use your newly built `tailwind-bundle.css` stylesheet.
-
 Open `http://0.0.0.0:8080`
 
 Edit any of the following files:
@@ -35,3 +33,5 @@ If you like what you see and want to save it and use it, run:
 ```bash
 yarn build
 ```
+
+And use your newly built `./tailwind-bundle.css` stylesheet.
