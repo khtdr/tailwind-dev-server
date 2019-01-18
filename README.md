@@ -2,6 +2,10 @@
 
 Simple quick way to get started learning and playing with Tailwindcss
 
+  - No "transpiling" configuration is needed (or used).
+  - No build tools need to be set up.
+  - Small and documented web server, just over 100 lines of code.
+  
 ## Installation
 ```bash
 git clone https://github.com/khtdr/tailwind-server
