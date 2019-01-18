@@ -2,6 +2,10 @@
 
 Simple quick way to get started learning and playing with Tailwind CSS
 
+<img style='max-width: 100%; display: block; height: auto;'
+     src='https://raw.githubusercontent.com/khtdr/tailwind-dev-server/master/sample-logs.png'
+/>
+
   - No "transpiling" configuration is needed (or used).
   - No build tools need to be set up.
   - Small and documented web server,
