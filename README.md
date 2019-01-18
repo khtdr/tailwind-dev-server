@@ -2,17 +2,18 @@
 
 Simple quick way to get started learning and playing with Tailwind CSS
 
+_Example output while running dev server:_
+
 <img style='max-width: 100%; display: block; height: auto;'
      src='https://raw.githubusercontent.com/khtdr/tailwind-dev-server/master/sample-logs.png'
 />
 
   - No "transpiling" configuration is needed (or used).
   - No build tools need to be set up.
-  - Small and documented web server,
-  - ~115 lines of code
-  - minimal dependencies:
-    - `socket.io` for **server** &laquo;&mdash;&raquo; **browser** communication,
+  - Tiny reactive web server: ~115 lines of code with lots of comments.
+  - Minimal dependencies:
     - `chalk` for color,
+    - `socket.io` for **server** &laquo;&mdash;&raquo; **browser** communication,
     - and `tailwindcss` of course.
   
 ## Installation
