@@ -28,7 +28,7 @@ yarn
 yarn start
 ```
 
-Open [http://localhost:8080](http://localhost:8080)
+Open <a href="http://localhost:8080" target="_blank">http://localhost:8080)</a>
 
 ## Development
 
