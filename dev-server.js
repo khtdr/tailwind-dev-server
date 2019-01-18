@@ -93,7 +93,7 @@ const tailwind = new TailwindCompiler();
 fs.watch(__dirname, (type, name) => {
     // this doesn't happen in normal editing, but it happens quite frequently
     // while working on this project. It can be skipped. (TODO: restart node server?)
-    if (name === 'server.js') {
+    if (name === 'dev-server.js') {
         return;
     }
     console.debug(chalk.dim('...'), type, name);

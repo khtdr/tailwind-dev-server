@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "start": "node server",
+    "start": "node dev-server",
     "build": "tailwind build style.css -c tailwind.js -o tailwind-bundle.css"
   },
   "dependencies": {

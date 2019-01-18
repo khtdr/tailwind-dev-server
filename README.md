@@ -1,6 +1,6 @@
-# Tailwindcss Playground
+# Tailwind CSS dev-server
 
-Simple quick way to get started learning and playing with Tailwindcss
+Simple quick way to get started learning and playing with Tailwind CSS
 
   - No "transpiling" configuration is needed (or used).
   - No build tools need to be set up.
