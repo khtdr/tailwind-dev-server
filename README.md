@@ -20,11 +20,11 @@ yarn start
 ```
 
 ## Building
-If you like what you see and want to use it, run 
+If you like what you see and want to save it and use it, run:
 ```bash
 yarn build
 ```
-And use your new `tailwind-bundle.css` build
+And use your newly built `tailwind-bundle.css` stylesheet.
 
 Open `http://0.0.0.0:8080`
 
