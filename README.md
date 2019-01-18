@@ -4,7 +4,8 @@ Simple quick way to get started learning and playing with Tailwindcss
 
   - No "transpiling" configuration is needed (or used).
   - No build tools need to be set up.
-  - Small and documented web server, just over 100 lines of code.
+  - Small and documented web server,
+  - ~115 lines of code, depends only on `tailwindcss`, `socket.io`, and `chalk`
   
 ## Installation
 ```bash
