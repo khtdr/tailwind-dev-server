@@ -115,7 +115,13 @@ fs.watch(__dirname, (type, name) => {
 const socket = io(http.createServer(
     (request, response) => {
         if (request.url === '/favicon.ico') {
-            return response.end(null);
+            return response.end();
+        }
+        if (request.url.match(/\/$/)) {
+            const Location = `${request.url}index.html`
+            console.log(chalk.yellow('302'), request.url, chalk.italic('to'), Location);
+            response.writeHead(302, { Location });
+            return response.end();
         }
         fs.readFile(`.${request.url}`, (err, data) => {
             if (err) {
