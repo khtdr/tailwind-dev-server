@@ -44,7 +44,7 @@ const { spawn } = require('child_process');
 // The `io` module will be used to send messages to the browser window.
 const io = require('socket.io');
 
-// Promisify allows for marginally cleaner code :shrugs:
+// Promisify allows for marginally cleaner code
 const { promisify } = require('util');
 
 // Chalk provides colorful output
@@ -96,7 +96,7 @@ fs.watch(__dirname, (type, name) => {
     if (name === 'dev-server.js') {
         return;
     }
-    console.debug(chalk.dim('...'), type, name);
+    console.debug(chalk.dim('...'), chalk.italic(`detected ${type}:`), chalk.bold(name));
     if (name.match(/\.htm/)) {
         // if they have edited an html page, there is nothing to compile
         reloadPage();
@@ -113,7 +113,7 @@ fs.watch(__dirname, (type, name) => {
 //  - checks for 404s
 //  - serves the file if it finds it
 // if the file is an html file, it will inject the socket javascript that listens
-// for events from this socket, and also inject the compiled tailwind css
+// for events from this socket, and it will also inject the compiled tailwind css
 const socket = io(http.createServer(
     (request, response) => {
         if (request.url === '/favicon.ico') {
@@ -140,11 +140,8 @@ const socket = io(http.createServer(
     console.log('-->', chalk.blue('http://0.0.0.0:8080'));
 }));
 
-// the rest of the functions have been described above, and all that
-// remains are simple implementations
-
-// this can be awaited, and is responsible for diverging the flow
-// based on the compilers success or not
+// this function can be `await`ed and it `await`s on the tailwind compile. No callbacks.
+// it is responsible for calling the right functions based on the compiler output
 async function compileStyles () {
     console.debug(chalk.dim('...'), 'compiling tailwind css');
     try {
