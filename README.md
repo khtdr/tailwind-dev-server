@@ -10,7 +10,10 @@ Simple quick way to get started learning and playing with Tailwind CSS
   - No build tools need to be set up.
   - Small and documented web server,
   - ~115 lines of code
-  - depends only on , `socket.io` for server &lt;-&gt; browser communication, and `chalk` for color, `tailwindcss` of course.
+  - minimal dependencies:
+    -- `socket.io` for server &lt;-&gt; browser communication,
+    -- `chalk` for color,
+    -- and `tailwindcss` of course.
   
 ## Installation
 ```bash
